@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-_1#f(vf6%obd4h!+3kzv3a6x2e+me2=e**2uvz0-!_*2w*k@p2
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+AUTH_USER_MODEL = 'visualboard.AdminUsers'
+LOGIN_URL = '/admindash/login/'
 
 # Application definition
 
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'visualboard.apps.VisualboardConfig'
 ]
 
 MIDDLEWARE = [
