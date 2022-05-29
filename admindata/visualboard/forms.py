@@ -12,7 +12,7 @@ class AdminRegisterForm(UserCreationForm):
         "password:mismatch": ("비밀번호가 맞지 않습니다 다시 입력해주세요..!")
     }
     full_name = forms.CharField(
-        max_length=20, required=True,
+        max_length=20, required=True, label="이름",
         widget=forms.TextInput(attrs={"class": "name", "placeholder": "성함"})
     )
 
@@ -35,6 +35,7 @@ class AdminRegisterForm(UserCreationForm):
             })
 
 
+# LoginForm
 class AdminLoginForm(AuthenticationForm):
     error_messages: Dict[str, Tuple[str]] = {
         'invalid_login': (
@@ -48,12 +49,12 @@ class AdminLoginForm(AuthenticationForm):
         self.fields["password"].label = "비밀번호"
 
     def clean(self):
-        email: Dict[str, str] = self.cleaned_data.get("email")
-        password: Dict[str, str] = self.cleaned_data.get("password")
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
         try:
-            email_check = AdminUsers.objects.get(email=email)
+            email_check = AdminUsers.object.get(email=email)
             if email_check.check_password(raw_password=password):
                 return self.cleaned_data
-        except AdminUsers.DoseNotExist:
+        except AdminUsers.DoesNotExist:
             pass
 

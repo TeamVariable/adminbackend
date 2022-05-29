@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        {% if msg %}{{msg}}{% endif %}
+        <form method="post">
+            {% csrf_token %}{{form.as_p}}
+            <button type="submit">회워가입</button>
+        </form>
+    </body>
 </html>
