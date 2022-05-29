@@ -1,8 +1,8 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import View, FormView
-from django.urls import reverse_lazy
+
 
 from .models import AdminUsers
 from .forms import AdminLoginForm, AdminRegisterForm
@@ -12,13 +12,17 @@ from .forms import AdminLoginForm, AdminRegisterForm
 class AdminLoginView(FormView):
     template_name: str = "visualboard/login.html"
     form_class = AdminLoginForm
-    success_url = reverse_lazy("visualboard:base")
+    success_url = "/admindash/base/"
 
-    def form_valid(self, form):
+    def form_invalid(self, form) -> HttpResponse:
+        return super().form_invalid(form)
+    
+    def form_valid(self, form) -> HttpResponse:
         email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        auth_user = authenticate(self.request, username=email, password=password)
-        if auth_user:
+        raw_password = form.cleaned_data.get("password")
+        auth_user = authenticate(self.request, email=email, password=raw_password)
+        print(email, raw_password, auth_user)
+        if auth_user is not None:
             login(self.request, auth_user)
         return super().form_valid(form)
 

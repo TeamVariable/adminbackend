@@ -53,8 +53,9 @@ class AdminLoginForm(AuthenticationForm):
         password = self.cleaned_data.get("password")
         try:
             email_check = AdminUsers.object.get(email=email)
-            if email_check.check_password(raw_password=password):
-                return self.cleaned_data
         except AdminUsers.DoesNotExist:
             pass
+        else:
+            if email_check.check_password(password):
+                return self.cleaned_data
 
