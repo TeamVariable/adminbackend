@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
 from typing import Dict, Tuple
+
 from .models import AdminUsers
 
 
@@ -39,7 +40,7 @@ class AdminLoginForm(AuthenticationForm):
         'inactive': _(
             "이 계정은 비활성화 or 인증되지 않았습니다 이메일 상태를 확인해주세요..!")
     }
-
+        
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.fields["password"].label = "비밀번호"

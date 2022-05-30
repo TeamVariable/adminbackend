@@ -9,21 +9,27 @@ from .forms import AdminLoginForm, AdminRegisterForm
 
 
 # Create your views here.
-class AdminLoginView(FormView):
-    template_name: str = "visualboard/login.html"
+class AdminLoginView(View):
+    template_name: str = "visualboard/register.html"
     form_class = AdminLoginForm
-    success_url = "/admindash/base/"
-
-    def form_valid(self, form) -> HttpResponse:
-        email = form.cleaned_data.get("email")
-        raw_password = form.cleaned_data.get("password")
-        auth_user = authenticate(self.request, username=email, password=raw_password)
-        print(email, raw_password, auth_user)
-        if auth_user is not None:
-            login(self.request, auth_user)
-        return super().form_valid(form)
-
-
+    
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, {"form": form})
+    
+    def post(self, request):
+        form = self.form_class(self.request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get("username")
+            raw_password = form.cleaned_data.get("password")
+            auth = authenticate(self.request, username=email, password=raw_password)
+            print(email, raw_password)
+            if auth is not None:
+                login(self.request, auth)
+                return HttpResponseRedirect("/admindash/login/")
+        return render(request, self.template_name, {"form": form})
+            
+        
 class AdminRegisterView(FormView):
     template_name: str = "visualboard/register.html"
     form_class = AdminRegisterForm
