@@ -1,3 +1,4 @@
+{% load custom_tags %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +6,6 @@
         <title>Title</title>
     </head>
     <body>
-        {% if msg %}{{msg}}{% endif %}
         <form method="post">
             {% csrf_token %}{{form.as_p}}
             <button type="submit">회원가입</button>

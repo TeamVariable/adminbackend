@@ -1,17 +1,19 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from typing import Dict, Tuple
 
 from .models import AdminUsers
+from typing import Dict, Tuple
+
 
 
 # RegisterForm
 class AdminRegisterForm(UserCreationForm):
-    error_messages: Dict[str, Tuple[str]] = {
-        "password:mismatch": ("비밀번호가 맞지 않습니다 다시 입력해주세요..!")
+    error_messages: Dict[str, str] = {
+        "password_mismatch": "비밀번호가 맞지 않습니다 다시 입력해주세요..!"
     }
     full_name = forms.CharField(
         max_length=20, label="이름",
@@ -31,12 +33,22 @@ class AdminRegisterForm(UserCreationForm):
                 "placeholder": f"password{num}-checking"
             })
 
+    def clean_password2(self) -> str:
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 != password2:
+            raise ValidationError(
+                self.error_messages["password_mismatch"],
+                code = "password_mismatch"
+            )
+        return super().clean_password2()
+
 
 # LoginForm
 class AdminLoginForm(AuthenticationForm):
-    error_messages: Dict[str, Tuple[str]] = {
+    error_messages: Dict[str, str] = {
         'invalid_login': _(
-            "비밀번호나 이메일이 올바르지 않습니다 다시 입력해주세요..!"),
+            "없는 이메일 이거나 비밀번호나 이메일이 올바르지 않습니다 다시 입력해주세요..!"),
         'inactive': _(
             "이 계정은 비활성화 or 인증되지 않았습니다 이메일 상태를 확인해주세요..!")
     }
@@ -45,14 +57,23 @@ class AdminLoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.fields["password"].label = "비밀번호"
 
+    def get_invalid_login_error(self) -> ValidationError:
+        return ValidationError(
+            self.error_messages["invalid_login"],
+            code="invalid_login",
+        )
+    
     def clean(self):
-        email = self.cleaned_data.get("email")
+        email = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
         try:
             email_check = AdminUsers.object.get(email=email)
-        except AdminUsers.DoesNotExist:
-            pass
-        else:
+            print(f"form -> {email}, form -> {password}")
             if email_check.check_password(password):
                 return self.cleaned_data
+            else:
+                raise self.get_invalid_login_error()
+        except AdminUsers.DoesNotExist:
+            raise self.get_invalid_login_error()
+            
 

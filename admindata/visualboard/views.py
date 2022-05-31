@@ -10,7 +10,7 @@ from .forms import AdminLoginForm, AdminRegisterForm
 
 # Create your views here.
 class AdminLoginView(View):
-    template_name: str = "visualboard/register.html"
+    template_name: str = "visualboard/login.html"
     form_class = AdminLoginForm
     
     def get(self, request):
@@ -18,15 +18,14 @@ class AdminLoginView(View):
         return render(request, self.template_name, {"form": form})
     
     def post(self, request):
-        form = self.form_class(self.request.POST)
+        form = self.form_class(data=self.request.POST)
         if form.is_valid():
             email = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password")
             auth = authenticate(self.request, username=email, password=raw_password)
-            print(email, raw_password)
             if auth is not None:
                 login(self.request, auth)
-                return HttpResponseRedirect("/admindash/login/")
+                return HttpResponseRedirect("/admindash/base/")
         return render(request, self.template_name, {"form": form})
             
         
