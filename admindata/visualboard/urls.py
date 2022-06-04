@@ -8,6 +8,7 @@ from . import views
 app_name: str = "visualboard"
 urlpatterns = [
     path("base/",      TemplateView.as_view(template_name="visualboard/index.html"), name="base"),
+    path("board/",     views.page_investigation_view, name="board"),
     path("register/",  views.AdminRegisterView.as_view(), name="register"),
     path("login/",     views.AdminLoginView.as_view(), name="login"),
     path("logout/",    views.logout_view, name="logout")

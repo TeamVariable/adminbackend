@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin user info</title>
+</head>
+<body>
+    <h3>이건 테스트 입니다</h3>
+    <table>
+        <thead>
+            <td>id</td>
+            <td>email</td>
+            <td>name</td>
+            <td>login</td>
+            <td>active</td>
+            <td>create</td>
+        </thead>        
+        {% for user in user %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.full_name}}</td>
+                <td>{{user.last_login}}</td>
+                <td>{{user.is_active}}</td>
+                <td>{{user.created_by}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if user.has_previous %}
+                <li class="page-item"><a class="page-link" href="?p={{users.previous_page_number}}">이전으로</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="#">이전으로</a></li>
+            {% endif %}
+            
+            <li class="page-item"><a class="page-link" href="?p={{user.number|add:1}}">{{user.number}}/{{user.paginator.num_pages}}</a></li>
+
+            {% if user.has_next %}
+                <li class="page-item"><a class="page-link" href="?p={{ user.next_page_number }}">다음으로</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="#">다음으로</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</body>
+</html>

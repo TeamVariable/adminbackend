@@ -18,11 +18,13 @@ class UserManager(BaseUserManager):
 class AdminUsers(AbstractBaseUser, PermissionsMixin):
     full_name = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(max_length=120, unique=True, verbose_name="이메일")
-
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    created_by = models.DateTimeField(auto_now_add=True)
+    
     USERNAME_FIELD: str = "email"
 
+    # admin create setting --> UserManager
     object = UserManager()
 
     @property
