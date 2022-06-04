@@ -59,7 +59,7 @@ class AdminLoginForm(forms.Form):
     )
     password = forms.CharField(
         max_length=50, required=False, label="패스워드",
-        widget=forms.TextInput(attrs={"type": "password", "class": "form-control", "placeholder": "Password"})
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Password"})
     )
     remember_me = forms.BooleanField(
         required=False, disabled=False,
