@@ -15,9 +15,12 @@
                                 <div class="col-lg-6">
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4"> Welcome !!</h1>
+                                            <h1 class="h4 text-gray-900 mb-4">Welcome..!</h1>
+                                            {% if form.errors %}
+                                                <h7>{{form.error_messages.invalid_login}}</h7>
+                                            {% endif %}
                                         </div>
-                                        <form class="user">
+                                        <form method="post" class="user">
                                             {% csrf_token %}
                                             <div class="form-group">
                                                 {{form.email}}
@@ -31,8 +34,9 @@
                                                     <label class="custom-control-label" for="customCheck">Remember Me</label>
                                                 </div>
                                             </div>
+                                            
                                             <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                login
+                                                로그인
                                             </button>       
                                             <hr>
                                             <a href="index.html" class="btn btn-google btn-user btn-block">
@@ -44,10 +48,10 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                            <a class="small" href="forgot-password.html">비밀번호를 잃어버리셧나요??</a>
                                         </div>
                                         <div class="text-center">
-                                            <a class="small" href={% url 'visualboard:register' %}>Create an Account!</a>
+                                            <a class="small" href={% url 'visualboard:register' %}>계정이 없으면 회원가입을 진행해주세요..!</a>
                                         </div>
                                     </div>
                                 </div>

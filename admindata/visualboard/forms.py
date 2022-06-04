@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-
+from django.contrib.auth import authenticate
 
 from .models import AdminUsers
 from typing import Dict, Tuple
@@ -15,9 +14,9 @@ class AdminRegisterForm(UserCreationForm):
     error_messages: Dict[str, str] = {
         "password_mismatch": "비밀번호가 맞지 않습니다 다시 입력해주세요..!"
     }
-    full_name = forms.CharField(
-        max_length=20, label="이름",
-        widget=forms.TextInput(attrs={"class": "name", "placeholder": "성함"})
+    full_name: forms = forms.CharField(
+        max_length=20, label="name",
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "이름"})
     )
 
     class Meta:
@@ -26,11 +25,14 @@ class AdminRegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+        self.fields["email"].widget.attrs.update({
+            "class": "form-control",
+            "placeholder": "이메일"
+        })
         for num in range(1, 3):
-            self.fields[f'password{num}'].label = f"패스워드{num}"
             self.fields[f"password{num}"].widget.attrs.update({
-                "class": f"password{num}-control",
-                "placeholder": f"password{num}-checking"
+                "class": "form-control",
+                "placeholder": f"패스워드 {num}번-확인"
             })
 
     def clean_password2(self) -> str:
@@ -47,21 +49,20 @@ class AdminRegisterForm(UserCreationForm):
 # LoginForm
 class AdminLoginForm(forms.Form):
     error_messages: Dict[str, str] = {
-        'invalid_login': _(
-            "없는 이메일 이거나 비밀번호나 이메일이 올바르지 않습니다 다시 입력해주세요..!"),
+        'invalid_login': _("비밀번호나 이메일이 올바르지 않습니다"),
         'inactive': _(
             "이 계정은 비활성화 or 인증되지 않았습니다 이메일 상태를 확인해주세요..!")
     }
     
-    email = forms.CharField(
-        max_length=50, required=True, label="이메일",
-        widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "Enter Email Addreadd"})
+    email: forms = forms.CharField(
+        max_length=50, required=True,
+        widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "이메일"})
     )
-    password = forms.CharField(
-        max_length=50, required=False, label="패스워드",
-        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Password"})
+    password: forms = forms.CharField(
+        max_length=50, required=False,
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "패스워드"})
     )
-    remember_me = forms.BooleanField(
+    remember_me: forms = forms.BooleanField(
         required=False, disabled=False,
         widget=forms.CheckboxInput(attrs={"class": "custom-control-input", "id": "customCheck"}),
     )
@@ -74,11 +75,12 @@ class AdminLoginForm(forms.Form):
         )
     
     def clean(self):
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("password")
+        email: str = self.cleaned_data.get("email")
+        password: str = self.cleaned_data.get("password")
+        remember_me: bool = self.cleaned_data.get("remember_me")
         try:
             email_check = AdminUsers.object.get(email=email)
-            print(f"form -> {email}, form -> {password}")
+            print(f"form -> {email_check}, password -> {password}, remember_me -> {remember_me}")
             if email_check.check_password(password):
                 return self.cleaned_data
             else:
