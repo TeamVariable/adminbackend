@@ -1,43 +1,44 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    {% include "visualboard/includes/head.html" %}
-    <body id="page-top">
+{% include "visualboard/includes/head.html" %}
 
-        <!-- Page Wrapper -->
-        <div id="wrapper">
-            <!-- Sidebar -->
-            {% include "visualboard/includes/sidebar.html" %}
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+<body id="page-top">
 
-                <!-- Main Content -->
-                <div id="content">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        {% include "visualboard/includes/sidebar.html" %}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <!-- Main Content -->
+            <div id="content">
 
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                        <!-- Topbar Search -->
-                        <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                    aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
                             </div>
-                        </form>
-                        <!-- Topbar Navbar -->
-                        {% include "visualboard/includes/nav.html" %}
-                        <!-- End of Topbar -->
+                        </div>
+                    </form>
+                    <!-- Topbar Navbar -->
+                    {% include "visualboard/includes/topbar.html" %}
+                    <!-- End of Topbar -->
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -93,11 +94,13 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                    Tasks
                                                 </div>
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
-                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%
+                                                        </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="progress progress-sm mr-2">
@@ -344,7 +347,8 @@
                                                 target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
                                             constantly updated collection of beautiful svg images that you can use
                                             completely free and without attribution!</p>
-                                        <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
+                                        <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations
+                                            on
                                             unDraw &rarr;</a>
                                     </div>
                                 </div>
@@ -355,10 +359,12 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                                     </div>
                                     <div class="card-body">
-                                        <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
+                                        <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to
+                                            reduce
                                             CSS bloat and poor page performance. Custom CSS classes are used to create
                                             custom components and custom utility classes.</p>
-                                        <p class="mb-0">Before working with this theme, you should become familiar with the
+                                        <p class="mb-0">Before working with this theme, you should become familiar with
+                                            the
                                             Bootstrap framework, especially the utility classes.</p>
                                     </div>
                                 </div>
@@ -369,66 +375,32 @@
                     </div>
                     <!-- /.container-fluid -->
 
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
 
-        </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="{% url 'visualboard:logout' %}">Logout</a>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
-            </div>
+            </footer>
+            <!-- End of Footer -->
+
         </div>
+        <!-- End of Content Wrapper -->
 
-        <!-- Bootstrap core JavaScript-->
-        <script src={% static "dash/vendor/jquery/jquery.min.js" %}></script>
-        <script src={% static "dash/vendor/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Core plugin JavaScript-->
-        <script src={% static "dash/vendor/jquery-easing/jquery.easing.min.js" %}></script>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-        <!-- Custom scripts for all pages-->
-        <script src={% static "dash/js/sb-admin-2.min.js" %}></script>
-
-        <!-- Page level plugins -->
-        <script src={% static "dash/vendor/chart.js/Chart.min.js" %}></script>
-
-        <!-- Page level custom scripts -->
-        <script src={% static "dash/js/demo/chart-area-demo.js" %}></script>
-        <script src={% static "dash/js/demo/chart-pie-demo.js" %}></script>
-    </body>
+    {% include "visualboard/includes/logout_injection.html" %}
+    {% include "visualboard/includes/js_compose.html" %}
+</body>
 
 </html>
