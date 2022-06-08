@@ -2,10 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import authenticate
 
 from .models import AdminUsers
-from typing import Dict, Tuple
+from typing import Dict
 
 
 

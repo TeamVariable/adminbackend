@@ -1,8 +1,7 @@
-import re
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
-from django.views.generic import View, FormView, TemplateView
+from django.views.generic import FormView, TemplateView
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
@@ -17,7 +16,7 @@ from .forms import AdminLoginForm, AdminRegisterForm
 
 # dash index LoginRequireMixin 상속
 class DashboardView(LoginRequiredMixin, TemplateView):
-    template_name: str = "visualboard/index.html"
+    template_name: str = "visualboard/base.html"
     redirect_field_name: str = "/admindash/login/"
     
 
@@ -56,7 +55,7 @@ def logout_view(request):
 # admin user information
 def page_investigation_view(request):
     p = int(request.GET.get("p", 1))  # http://localhost/?p=1~~
-    user = AdminUsers.object.all().order_by("id")
+    user = AdminUsers.object.all().order_by("id")  # spring boot data format architecture one of data injection 
     page = Paginator(user, 10)
     page_index = page.get_page(p)
     
