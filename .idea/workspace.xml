@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afc5e997-38a8-4abb-b998-2a413844e697" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/admindata/visualboard/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admindata/visualboard/templates/visualboard/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admindata/visualboard/templates/visualboard/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admindata/admindash/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/admindata/admindash/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admindata/admindash/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/admindata/admindash/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admindata/visualboard/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/admindata/visualboard/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admindata/visualboard/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/admindata/visualboard/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admindata/visualboard/migrations/0002_adminusers_created_by.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admindata/visualboard/migrations/0003_remove_adminusers_is_admin.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/admindata/visualboard/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/admindata/visualboard/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admindata/visualboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/admindata/visualboard/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +45,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/admindata" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\limha\OneDrive\바탕 화면\project\adminbackend\admindata" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

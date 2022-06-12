@@ -7,7 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 
 
-from typing import Any, Dict
 from .models import AdminUsers
 from .forms import AdminLoginForm, AdminRegisterForm
 

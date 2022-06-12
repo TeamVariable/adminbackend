@@ -1,6 +1,26 @@
 version: '3.9'
 
-services:      
+services:
+  sql:
+    container_name: admin-sql
+    image: mysql
+    ports:
+      - "3307:3306"
+    env_file:
+      - ./.env
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USERNAME=${DB_USERNAME}
+      - TZ=Asia/Seoul
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --collation-server=utf8mb4_unicode_ci
+      - --character-set-server=utf8mb4
+      - --lower_case_table_names=1
+    volumes:
+      - .sqlVolume:/var/lib/mysql
+
   backend:
     container_name: admin-django
     build: 
@@ -10,13 +30,13 @@ services:
     volumes:
       - ./admindata/:/admindata
       - static-volume:/admindata/django_static
+    env_file:
+      - ./.env
     ports:
       - "8000:8000"
     environment:
-      - MYSQL_DATABASE=admindata
-      - MYSQL_ROOT_PASSWORD=123456789
-    depends_on:
-      - sql
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
 
   ngnix:
     build: 
@@ -24,7 +44,7 @@ services:
       dockerfile: Dockerfile
     container_name: admin-nginx
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - ./nginx/nginx-setup.conf:/etc/nginx/con.f/nginx-setup.conf
       - static-volume:/admindata/django_static
@@ -32,26 +52,9 @@ services:
     depends_on:
       - backend
 
-  sql:
-    image: mysql
-    restart: always
-    container_name: admin-sql
-    ports:
-      - "3307:3306"
-    volumes:
-      - .sqlVolume:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=admindata
-      - MYSQL_ROOT_PASSWORD=123456789
-      - TZ=Asia/Seoul
-    command: 
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-      - --lower_case_table_names=1
-
 
 volumes:
+  mysql:
   backend:
   build_file:
   static-volume:
-  mysql:

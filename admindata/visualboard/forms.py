@@ -7,7 +7,6 @@ from .models import AdminUsers
 from typing import Dict
 
 
-
 # RegisterForm
 class AdminRegisterForm(UserCreationForm):
     error_messages: Dict[str, str] = {
@@ -37,10 +36,10 @@ class AdminRegisterForm(UserCreationForm):
     def clean_password2(self) -> str:
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2 :
+        if password1 and password2 and password1 != password2:
             raise ValidationError(
                 self.error_messages["password_mismatch"],
-                code = "password_mismatch"
+                code="password_mismatch"
             )
         return super().clean_password2()
 
@@ -52,7 +51,7 @@ class AdminLoginForm(forms.Form):
         'inactive': _(
             "이 계정은 비활성화 or 인증되지 않았습니다 이메일 상태를 확인해주세요..!")
     }
-    
+
     email: forms = forms.CharField(
         max_length=50, required=True,
         widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "이메일"})
@@ -65,14 +64,13 @@ class AdminLoginForm(forms.Form):
         required=False, disabled=False,
         widget=forms.CheckboxInput(attrs={"class": "custom-control-input", "id": "customCheck"}),
     )
-    
-    
+
     def get_invalid_login_error(self) -> ValidationError:
         return ValidationError(
             self.error_messages["invalid_login"],
             code="invalid_login",
         )
-    
+
     def clean(self):
         email: str = self.cleaned_data.get("email")
         password: str = self.cleaned_data.get("password")
@@ -86,5 +84,3 @@ class AdminLoginForm(forms.Form):
                 raise self.get_invalid_login_error()
         except AdminUsers.DoesNotExist:
             raise self.get_invalid_login_error()
-            
-
