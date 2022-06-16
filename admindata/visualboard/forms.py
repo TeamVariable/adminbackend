@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .models import AdminUsers
 from typing import Dict
+from .models import AdminUsers
 
 
 # RegisterForm

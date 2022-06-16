@@ -9,27 +9,14 @@ class DateTimeStamp(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        abstract = True
+        abstract: bool = True
 
 
 # Main DB initialization
-class UserTire(models.Model):
-    class UserTier(models.TextChoices):
-        NORMALUSERL: str = "일반유저"
-        VIPUSER: str = "뿜뿜유저"
-
-    username = models.CharField(max_length=30, primary_key=True, verbose_name="이름")
-    tire = models.CharField(max_length=10, choices=UserTier.choices, default=UserTier.NORMALUSER)
-
-    class Meta:
-        db_table: str = "usertire"
-
-
 class UserInformation(DateTimeStamp):
     username = models.CharField(max_length=30)
     nick_name = models.CharField(max_length=100)
     phone = models.BigIntegerField()
-    user_tire = models.ForeignKey(UserTire, on_delete=models.CASCADE)
     email = models.EmailField(max_length=120, unique=True, verbose_name="이메일")
 
     class Meta:
@@ -42,6 +29,18 @@ class UserInformation(DateTimeStamp):
                 )
             )
         ]
+        
+class UserTire(models.Model):
+    class UserTier(models.TextChoices):
+        NORMALUSERL: str = "일반유저"
+        VIPUSER: str = "뿜뿜유저"
+
+    username = models.CharField(max_length=30, verbose_name="이름")
+    tire = models.CharField(max_length=10, choices=UserTier.choices, default=UserTier.NORMALUSERL)
+    info = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table: str = "usertire"
 
 
 # admin database
@@ -69,7 +68,7 @@ class AdminUsers(AbstractBaseUser, PermissionsMixin, DateTimeStamp):
 
     # index
     class Meta:
-        db_table: str = "adminUser"
+        db_table: str = "AdminUser"
         indexes = [
             models.Index(
                 fields=[
