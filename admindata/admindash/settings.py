@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+from .my_setting import MY_DATABASES, MY_SECRET
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,8 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_1#f(vf6%obd4h!+3kzv3a6x2e+me2=e**2uvz0-!_*2w*k@p2'
-
+SECRET_KEY = MY_SECRET["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -82,16 +82,7 @@ WSGI_APPLICATION = 'admindash.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'admindata',
-        'USER': 'root',
-        'PASSWORD': '123456789',
-        'HOST': 'sql',
-        'PORT': '3306'
-    }
-}
+DATABASES = MY_DATABASES
 
 
 # Password validation
