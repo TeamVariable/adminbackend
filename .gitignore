@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 .env
+admindata/admindash/my_setting.py
