@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include "visualboard/includes/head.html" %}
+    <title>User table | hotalication</title>
+    <body id="page-top">
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            {% include "visualboard/includes/sidebar.html" %}
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <form class="form-inline">
+                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </form>
+
+                        <!-- Topbar Search -->
+                        <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                    aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        {% include "visualboard/includes/topbar.html" %}
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">가입 명단</h1>
+                        <p class="mb-4">다같이 모두 외쳐 이얏호응</p>
+
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">명단</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>userIdx</td>
+                                                            <td>name</td>
+                                                            <td>nickname</td>
+                                                            <td>phone</td>
+                                                            <td>email</td>
+                                                            <td>created</td>
+                                                            <td>updated</td>
+                                                        </tr>
+                                                    </thead>   
+                                                    <tbody>     
+                                                        {% for user in user %}
+                                                            <tr>
+                                                                <td>{{user.id}}</td>
+                                                                <td>{{user.email}}</td>
+                                                                <td>{{user.full_name}}</td>
+                                                                <td>{{user.last_login}}</td>
+                                                                <td>{{user.is_active}}</td>
+                                                                <td>{{user.created_by}}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">템플릿 태그 해서 인원수 들어갈자리..!</div>                                        
+                                            </div>
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                    <ul class="pagination justify-content-end">
+                                                        {% if user.has_previous %}
+                                                            <li class="paginate_button page-item active"><a class="page-link" aria-controls="dataTable" href="?p={{users.previous_page_number}}">이전</a></li>
+                                                        {% else %}
+                                                            <li class="paginate_button page-item active"><a class="page-link" aria-controls="dataTable" href="#">이전</a></li>
+                                                        {% endif %}
+                                                        
+                                                        <li class="paginate_button page-item"><a class="page-link" aria-controls="dataTable" href="?p={{user.number|add:1}}">{{user.number}}</a></li>
+                                            
+                                                        {% if user.has_next %}
+                                                            <li class="paginate_button page-item disable"><a class="page-link" aria-controls="dataTable" href="?p={{ user.next_page_number }}">다음</a></li>
+                                                        {% else %}
+                                                            <li class="paginate_button page-item disable"><a class="page-link" aria-controls="dataTable" href="#">다음으로</a></li>
+                                                        {% endif %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        {% include "visualboard/includes/logout_injection.html" %}
+        {% include "visualboard/includes/js_compose.html" %}
+    </body>
+</html>
